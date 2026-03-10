@@ -1,12 +1,12 @@
 const userService = require("../services/userService");
 
 const mockUsers = [
-  { id: DH52200344, name: "Võ Phương Anh" },
-  { id: DH52200423, name: "Lâm Dũ Cường" },
-  { id: DH52200627, name: "Nguyễn Thúy Hằng" },
-  { id: DH52200670, name: "Bành Kim Hiếu" },
-  { id: DH52200975, name: "Hoàng Đặng Diệp Lân" },
-  { id: DH52201679, name: "Nguyễn Hồng Quốc Trường" }
+  { id: "DH52200344", name: "Võ Phương Anh" },
+  { id: "DH52200423", name: "Lâm Dũ Cường" },
+  { id: "DH52200627", name: "Nguyễn Thúy Hằng" },
+  { id: "DH52200670", name: "Bành Kim Hiếu" },
+  { id: "DH52200975", name: "Hoàng Đặng Diệp Lân" },
+  { id: "DH52201679", name: "Nguyễn Hồng Quốc Trường" }
 ];
 
 exports.getAllUsers = async (req, res) => {
