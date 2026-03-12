@@ -1,5 +1,7 @@
 const userService = require("../services/userService");
 
+/* GET ALL USERS */
+
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await userService.getAllUsers();
@@ -8,6 +10,8 @@ exports.getAllUsers = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+/* GET USER BY ID */
 
 exports.getUserById = async (req, res) => {
   try {
@@ -18,30 +22,55 @@ exports.getUserById = async (req, res) => {
   }
 };
 
+/* CREATE USER */
+
 exports.createUser = async (req, res) => {
   try {
-    const { id, name } = req.body;
-    await userService.createUser(id, name);
-    res.json({ message: "User created" });
+
+    const { mssv, name } = req.body;
+
+    const user = await userService.createUser(mssv, name);
+
+    res.json({
+      message: "User created",
+      data: user
+    });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
+/* UPDATE USER */
 
 exports.updateUser = async (req, res) => {
   try {
+
     const { name } = req.body;
-    await userService.updateUser(req.params.id, name);
-    res.json({ message: "User updated" });
+
+    const user = await userService.updateUser(req.params.id, name);
+
+    res.json({
+      message: "User updated",
+      data: user
+    });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
+/* DELETE USER */
+
 exports.deleteUser = async (req, res) => {
   try {
+
     await userService.deleteUser(req.params.id);
-    res.json({ message: "User deleted" });
+
+    res.json({
+      message: "User deleted"
+    });
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
