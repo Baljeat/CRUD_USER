@@ -1,21 +1,38 @@
-const userRepo = require("../repositories/userRepository");
+const db = require("../config/db");
 
 exports.getAllUsers = async () => {
-  return await userRepo.getAllUsers();
+  const result = await db.query("SELECT * FROM users ORDER BY id");
+  return result.rows;
 };
 
 exports.getUserById = async (id) => {
-  return await userRepo.getUserById(id);
+  const result = await db.query(
+    "SELECT * FROM users WHERE id=$1",
+    [id]
+  );
+  return result.rows[0];
 };
 
-exports.createUser = async (name) => {
-  return await userRepo.createUser(name);
+exports.createUser = async (id, name) => {
+  const result = await db.query(
+    "INSERT INTO users(id,name) VALUES($1,$2)",
+    [id, name]
+  );
+  return result;
 };
 
 exports.updateUser = async (id, name) => {
-  return await userRepo.updateUser(id, name);
+  const result = await db.query(
+    "UPDATE users SET name=$1 WHERE id=$2",
+    [name, id]
+  );
+  return result;
 };
 
 exports.deleteUser = async (id) => {
-  return await userRepo.deleteUser(id);
+  const result = await db.query(
+    "DELETE FROM users WHERE id=$1",
+    [id]
+  );
+  return result;
 };
