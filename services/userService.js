@@ -1,13 +1,11 @@
 const db = require("../config/db");
 
-/* GET ALL USERS */
-
 exports.getAllUsers = async () => {
-  const result = await db.query("SELECT * FROM users ORDER BY id");
+  const result = await db.query(
+    "SELECT * FROM users ORDER BY id"
+  );
   return result.rows;
 };
-
-/* GET USER BY ID */
 
 exports.getUserById = async (id) => {
   const result = await db.query(
@@ -17,17 +15,13 @@ exports.getUserById = async (id) => {
   return result.rows[0];
 };
 
-/* CREATE USER */
-
-exports.createUser = async (mssv, name) => {
+exports.createUser = async (name) => {
   const result = await db.query(
-    "INSERT INTO users(mssv,name) VALUES($1,$2) RETURNING *",
-    [mssv, name]
+    "INSERT INTO users(name) VALUES($1) RETURNING *",
+    [name]
   );
   return result.rows[0];
 };
-
-/* UPDATE USER */
 
 exports.updateUser = async (id, name) => {
   const result = await db.query(
@@ -37,12 +31,9 @@ exports.updateUser = async (id, name) => {
   return result.rows[0];
 };
 
-/* DELETE USER */
-
 exports.deleteUser = async (id) => {
-  const result = await db.query(
+  await db.query(
     "DELETE FROM users WHERE id=$1",
     [id]
   );
-  return result;
 };

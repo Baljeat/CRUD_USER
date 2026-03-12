@@ -23,25 +23,19 @@ exports.getUserById = async (req, res) => {
 };
 
 /* CREATE USER */
-
 exports.createUser = async (req, res) => {
   try {
 
-    const { mssv, name } = req.body;
+    const { name } = req.body;
 
-    await userService.createUser(mssv, name);
+    const user = await userService.createUser(name);
 
-    res.json({ message: "User created" });
+    res.json(user);
 
   } catch (err) {
 
-    if (err.code === "23505") {
-      return res.status(400).json({
-        error: "MSSV already exists"
-      });
-    }
-
     res.status(500).json({ error: err.message });
+
   }
 };
 
@@ -52,15 +46,17 @@ exports.updateUser = async (req, res) => {
 
     const { name } = req.body;
 
-    const user = await userService.updateUser(req.params.id, name);
+    const user = await userService.updateUser(
+      req.params.id,
+      name
+    );
 
-    res.json({
-      message: "User updated",
-      data: user
-    });
+    res.json(user);
 
   } catch (err) {
+
     res.status(500).json({ error: err.message });
+
   }
 };
 
