@@ -29,14 +29,18 @@ exports.createUser = async (req, res) => {
 
     const { mssv, name } = req.body;
 
-    const user = await userService.createUser(mssv, name);
+    await userService.createUser(mssv, name);
 
-    res.json({
-      message: "User created",
-      data: user
-    });
+    res.json({ message: "User created" });
 
   } catch (err) {
+
+    if (err.code === "23505") {
+      return res.status(400).json({
+        error: "MSSV already exists"
+      });
+    }
+
     res.status(500).json({ error: err.message });
   }
 };
