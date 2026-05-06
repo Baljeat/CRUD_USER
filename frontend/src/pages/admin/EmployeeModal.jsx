@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import API from "../../services/api";
 
-export default function EmployeeModal({ isOpen, onClose, employee, roles, departments, refreshData }) {
+export default function EmployeeModal({ isOpen, onClose, employee, roles, departments, refreshData, isView }) {
   const initialForm = {
     manv: "", hotennv: "", gioitinh: "Nam", ngsinh: "", 
     sdt: "", email: "", diachi: "", ngaybatdaulam: "", 
@@ -174,7 +174,7 @@ export default function EmployeeModal({ isOpen, onClose, employee, roles, depart
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{ maxWidth: "1000px", width: "95%", padding: "30px", borderRadius: "16px" }}>
         <div className="modal-header">
-          <h2>{editing ? "Cập nhật nhân viên" : "Thêm nhân viên mới"}</h2>
+          <h2>{isView ? "Chi tiết nhân viên" : (editing ? "Cập nhật nhân viên" : "Thêm nhân viên mới")}</h2>
           <button className="btn-close-modal" onClick={onClose}>&times;</button>
         </div>
 
@@ -197,27 +197,27 @@ export default function EmployeeModal({ isOpen, onClose, employee, roles, depart
         {/* TAB THÔNG TIN CHUNG */}
         {activeTab === 'info' && (
           <div className="employee-form-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
-            <div className="form-group"><label>Mã NV (*)</label><input name="manv" value={form.manv} onChange={handleChange} disabled={editing} placeholder="VD: NV001" /></div>
-              <div className="form-group"><label>Họ Tên (*)</label><input name="hotennv" value={form.hotennv} onChange={handleChange} placeholder="Nguyễn Văn A" /></div>
-              <div className="form-group"><label>Giới tính</label><select name="gioitinh" value={form.gioitinh} onChange={handleChange}><option value="Nam">Nam</option><option value="Nữ">Nữ</option><option value="Khác">Khác</option></select></div>
-              <div className="form-group"><label>Ngày sinh</label><input type="date" name="ngsinh" value={form.ngsinh} onChange={handleChange} /></div>
-              <div className="form-group"><label>Số điện thoại</label><input name="sdt" value={form.sdt} onChange={handleChange} /></div>
-              <div className="form-group"><label>Email</label><input type="email" name="email" value={form.email} onChange={handleChange} /></div>
-              <div className="form-group"><label>Địa chỉ</label><input name="diachi" value={form.diachi} onChange={handleChange} /></div>
-              <div className="form-group"><label>Ngày bắt đầu làm</label><input type="date" name="ngaybatdaulam" value={form.ngaybatdaulam} onChange={handleChange} /></div>
+            <div className="form-group"><label>Mã NV (*)</label><input name="manv" value={form.manv} onChange={handleChange} disabled={isView || editing} placeholder="VD: NV001" /></div>
+              <div className="form-group"><label>Họ Tên (*)</label><input name="hotennv" value={form.hotennv} onChange={handleChange} disabled={isView} placeholder="Nguyễn Văn A" /></div>
+              <div className="form-group"><label>Giới tính</label><select name="gioitinh" value={form.gioitinh} onChange={handleChange} disabled={isView}><option value="Nam">Nam</option><option value="Nữ">Nữ</option><option value="Khác">Khác</option></select></div>
+              <div className="form-group"><label>Ngày sinh</label><input type="date" name="ngsinh" value={form.ngsinh} onChange={handleChange} disabled={isView} /></div>
+              <div className="form-group"><label>Số điện thoại</label><input name="sdt" value={form.sdt} onChange={handleChange} disabled={isView} /></div>
+              <div className="form-group"><label>Email</label><input type="email" name="email" value={form.email} onChange={handleChange} disabled={isView} /></div>
+              <div className="form-group"><label>Địa chỉ</label><input name="diachi" value={form.diachi} onChange={handleChange} disabled={isView} /></div>
+              <div className="form-group"><label>Ngày bắt đầu làm</label><input type="date" name="ngaybatdaulam" value={form.ngaybatdaulam} onChange={handleChange} disabled={isView} /></div>
               <div className="form-group">
                 <label>Chức Vụ (*)</label>
-                <select name="macv" value={form.macv} onChange={handleChange}><option value="">-- Chọn chức vụ --</option>{roles.map(role => (<option key={role.macv} value={role.macv}>{role.tencv} ({role.macv})</option>))}</select>
+                <select name="macv" value={form.macv} onChange={handleChange} disabled={isView}><option value="">-- Chọn chức vụ --</option>{roles.map(role => (<option key={role.macv} value={role.macv}>{role.tencv} ({role.macv})</option>))}</select>
               </div>
-              <div className="form-group">
+              {/*<div className="form-group">
                 <label>Trạng thái</label>
-                <select name="trangthai" value={form.trangthai} onChange={handleChange}><option value="active">Active</option><option value="inactive">Inactive</option></select>
-              </div>
+                <select name="trangthai" value={form.trangthai} onChange={handleChange} disabled={isView}><option value="active">Active</option><option value="inactive">Inactive</option></select>
+              </div>*/}
 
               {/* AUTOCOMPLETE PHÒNG BAN */}
               <div className="form-group autocomplete-wrapper" ref={autocompleteRef}>
                 <label>Phòng ban</label>
-                <input placeholder="Gõ tên hoặc mã PB..." value={pbSearchText} onChange={(e) => { setPbSearchText(e.target.value); setShowPbDropdown(true); if (form.mapb) setForm({ ...form, mapb: "" }); }} onFocus={() => setShowPbDropdown(true)} />
+                <input placeholder="Gõ tên hoặc mã PB..." value={pbSearchText} onChange={(e) => { setPbSearchText(e.target.value); setShowPbDropdown(true); if (form.mapb) setForm({ ...form, mapb: "" }); }} onFocus={() => setShowPbDropdown(true)} disabled={isView} />
                 {showPbDropdown && (
                   <div className="autocomplete-dropdown">
                     {departments.filter(d => {
@@ -247,6 +247,7 @@ export default function EmployeeModal({ isOpen, onClose, employee, roles, depart
             </div>
 
             {/* FORM THÊM BẰNG CẤP MỚI */}
+            {!isView && (
             <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '8px', marginBottom: '20px', border: '1px solid #e2e8f0', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
               <div className="employee-form-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '15px' }}>
                 <div className="form-group"><label>Tên bằng (*)</label><input value={degreeForm.tenbc} onChange={e => setDegreeForm({...degreeForm, tenbc: e.target.value})} placeholder="VD: Cử nhân" /></div>
@@ -275,13 +276,14 @@ export default function EmployeeModal({ isOpen, onClose, employee, roles, depart
                 </div>
               </div>
             </div>
+            )}
 
             {/* BẢNG DANH SÁCH BẰNG CẤP ĐÃ LƯU */}
             <div className="table-responsive">
               <table className="employee-table">
                 <thead>
                   <tr>
-                    <th>Tên bằng</th><th>Chuyên ngành</th><th>Xếp loại</th><th>Trường đào tạo</th><th>Năm TN</th><th>Hành động</th>
+                    <th>Tên bằng</th><th>Chuyên ngành</th><th>Xếp loại</th><th>Trường đào tạo</th><th>Năm TN</th>{!isView && <th>Hành động</th>}
                   </tr>
                 </thead>
                 <tbody>
@@ -292,12 +294,14 @@ export default function EmployeeModal({ isOpen, onClose, employee, roles, depart
                       <td>{d.xeploai || '-'}</td>
                       <td>{d.truongdaotao || '-'}</td>
                       <td>{d.namtotnghiep || '-'}</td>
+                      {!isView && (
                       <td style={{display: 'flex', gap: '5px'}}>
                         <button onClick={() => handleEditDegreeClick(d)} style={{ background: '#4e73df', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Sửa</button>
                         <button onClick={() => handleDeleteDegree(d.mabc)} style={{ background: '#ef4444', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>Xoá</button>
                       </td>
+                      )}
                     </tr>
-                  )) : <tr><td colSpan="6" style={{ textAlign: "center", padding: "20px" }}>Chưa có dữ liệu bằng cấp.</td></tr>}
+                  )) : <tr><td colSpan={isView ? "5" : "6"} style={{ textAlign: "center", padding: "20px" }}>Chưa có dữ liệu bằng cấp.</td></tr>}
                 </tbody>
               </table>
             </div>
@@ -307,8 +311,8 @@ export default function EmployeeModal({ isOpen, onClose, employee, roles, depart
 
         {/* CỤM NÚT LƯU ĐẶT RA NGOÀI ĐỂ TAB NÀO CŨNG BẤM ĐƯỢC */}
         <div className="form-actions" style={{ marginTop: "25px", borderTop: "1px solid #e2e8f0", paddingTop: "20px" }}>
-          <button className="btn-clear" onClick={onClose}>{editing ? "Đóng" : "Hủy"}</button>
-          {editing ? <button className="btn-update" onClick={handleUpdate}>Cập nhật thông tin NV</button> : <button className="btn-add" onClick={handleAdd}>Thêm nhân viên</button>}
+          <button className="btn-clear" onClick={onClose}>{isView ? "Đóng" : (editing ? "Đóng" : "Hủy")}</button>
+          {!isView && (editing ? <button className="btn-update" onClick={handleUpdate}>Cập nhật thông tin NV</button> : <button className="btn-add" onClick={handleAdd}>Thêm nhân viên</button>)}
         </div>
 
       </div>

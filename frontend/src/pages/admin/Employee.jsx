@@ -7,6 +7,8 @@ export default function Employees() {
   const [employees, setEmployees] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null); // Nhân viên đang được chọn để Sửa
+  const [isViewMode, setIsViewMode] = useState(false);
+
 
   // State quản lý Phân trang
   const [currentPage, setCurrentPage] = useState(1);
@@ -68,13 +70,21 @@ export default function Employees() {
     }
   };
 
+  const handleViewEmployee = (emp) => {
+    setIsViewMode(true);
+    setSelectedEmployee(emp);
+    setIsModalOpen(true);
+  };
+
   const openAddModal = () => {
     setSelectedEmployee(null);
+    setIsViewMode(false);
     setIsModalOpen(true);
   };
 
   const handleEdit = (emp) => {
     setSelectedEmployee(emp);
+    setIsViewMode(false);
     setIsModalOpen(true);
   };
 
@@ -124,6 +134,7 @@ export default function Employees() {
         roles={roles} 
         departments={departments} 
         refreshData={fetchEmployees} 
+        isView={isViewMode}
       />
 
       <div className="table-responsive">
@@ -164,6 +175,7 @@ export default function Employees() {
                     </span>
                   </td>
                   <td className="action-btns">
+                    <button className="btn-view" onClick={() => handleViewEmployee(emp)} style={{ background: "#3b82f6", color: "white", padding: "6px 12px", border: "none", borderRadius: "4px", cursor: "pointer", marginRight: "5px", fontWeight: "bold" }}>Xem</button>
                     <button className="btn-edit" onClick={() => handleEdit(emp)}>Sửa</button>
                     {/* Chỉ hiện nút "Cho nghỉ" nếu nhân viên đó chưa nghỉ việc */}
                     {emp.trangthai !== 'Nghỉ việc' && (

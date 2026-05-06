@@ -13,6 +13,8 @@ exports.createEmployee = async (data) => {
     const numberPart = data.manv.replace(/nv/i, '');
     const tenTaiKhoan = `user${parseInt(numberPart, 10)}`;
 
+    data.trangthai = "active";
+
     const userData = {
         tentk: tenTaiKhoan,
         pass: "123",
