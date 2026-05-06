@@ -1,0 +1,269 @@
+.employee-container {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.employee-container h1 {
+  padding-bottom: 5px;
+  text-align: left;
+}
+
+/* Phần Filter (Tìm kiếm & Lọc) */
+.filter-section {
+  display: flex;
+  gap: 15px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  align-items: center;
+}
+
+.filter-section input,
+.filter-section select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+
+.filter-section input:focus,
+.filter-section select:focus {
+  border-color: #667eea;
+}
+
+/* Phần Form nhập liệu dùng CSS Grid */
+.employee-form-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.employee-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 5px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #667eea;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  transition: 0.2s;
+}
+
+.btn-add { background: #455a79; }
+.btn-update { background: #667eea; }
+.btn-clear { background: #ccc; color: #333 !important; }
+
+/* Phần Table */
+.table-responsive {
+  overflow-x: auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.employee-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1200px; /* Đảm bảo bảng không bị co dúm khi có nhiều cột */
+}
+
+.employee-table th,
+.employee-table td {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.employee-table th {
+  background: #f5f6fa;
+  font-weight: bold;
+}
+
+.employee-table tr {
+  border-bottom: 1px solid #eee;
+}
+
+.employee-table tr:hover {
+  background: #f9f9ff;
+}
+
+.action-btns button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-edit { background: #fced95; color: black; }
+.btn-delete { background: #ff5768; color: white; }
+
+/* Nút Thêm nhân viên ở màn hình chính */
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.header-actions h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.btn-add-new {
+  background: #455a79;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-add-new:hover {
+  background: #33425a;
+}
+
+/* HIỆU ỨNG LỚP PHỦ MODAL (OVERLAY) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Nền đen mờ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Đảm bảo nằm trên cùng */
+  backdrop-filter: blur(2px);
+}
+
+/* NỘI DUNG MODAL */
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 95%;
+  max-width: 1100px; /* 🔥 Nới rộng Modal từ 800px lên 1100px cho thoải mái */
+  max-height: 90vh; /* Tránh form quá dài vượt quá màn hình */
+  overflow-y: auto; /* Cuộn dọc nếu form quá dài */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  animation: modalFadeIn 0.3s ease;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn-close-modal:hover {
+  color: red;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.autocomplete-wrapper {
+  position: relative;
+}
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1001; /* Đảm bảo nổi lên trên các input khác */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-top: 5px;
+}
+
+.autocomplete-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  text-align: left;
+  transition: 0.2s;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+}
+
+.autocomplete-item:hover {
+  background: #f4f3ec;
+  color: #aa3bff;
+  font-weight: bold;
+}

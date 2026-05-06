@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+.dashboard-content {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #f8fafc;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #72747c;
+  margin-bottom: 30px;
+}
+
+.page-title {
+  border-bottom: none !important;
+  margin: 0;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.current-time-display {
+  background: white;
+  color: #4e73df;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+}
+
+/* Grid và Card trang trí lại */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+/* Hiệu ứng khi di chuột vào card */
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* Màu sắc rực rỡ hơn cho từng loại card */
+.stat-card.blue { border-left: 5px solid #4338ca; }
+.blue .stat-icon { background: #e0e7ff; color: #4338ca; }
+
+.stat-card.green { border-left: 5px solid #15803d; }
+.green .stat-icon { background: #dcfce7; color: #15803d; }
+
+.stat-card.orange { border-left: 5px solid #c2410c; }
+.orange .stat-icon { background: #ffedd5; color: #c2410c; }
+
+.stat-card.purple { border-left: 5px solid #7e22ce; }
+.purple .stat-icon { background: #f3e8ff; color: #7e22ce; }
+
+.stat-info p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.stat-info h3 {
+  margin: 5px 0 0 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+/* Table Deco */
+.table-section {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.table-section h3 {
+  margin-bottom: 20px;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+
+.custom-table th {
+  padding: 10px 15px;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-align: left;
+}
+
+.custom-table td {
+  padding: 18px 15px;
+  background: #f8fafc; /* Màu nền nhẹ cho từng hàng */
+  border-top: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.custom-table tr td:first-child { 
+  border-left: 1px solid #f1f5f9;
+  border-radius: 12px 0 0 12px; 
+}
+
+.custom-table tr td:last-child { 
+  border-right: 1px solid #f1f5f9;
+  border-radius: 0 12px 12px 0; 
+}
+
+/* Badge Trạng thái */
+.status-badge {
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status-badge.active { 
+  background: #dcfce7; 
+  color: #166534; 
+  border: 1px solid #bbf7d0;
+}
+
+.status-badge.inactive { 
+  background: #fee2e2; 
+  color: #991b1b; 
+  border: 1px solid #fecaca;
+}
+
+/* Loading */
+.spinner {
+  border-top: 4px solid #4e73df;
+}
+
+/* 1. Xóa bỏ gạch chân cũ ở tiêu đề (nếu còn) */
+.page-title {
+  border-bottom: none !important; 
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Cấu trúc quan trọng để đường gạch dài và đậm */
+.dashboard-header {
+  display: flex !important;
+  justify-content: space-between; 
+  align-items: center;           
+  width: 100%;                  
+  padding-bottom: 7px;          
+  border-bottom: 3px solid #72747c; 
+  margin-bottom: 20px;           
+}
+
+.current-time-display {
+  background: #f0f3ff;
+  color: #4e73df;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap; 
+}

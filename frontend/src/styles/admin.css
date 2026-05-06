@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+/* --- RESET & GLOBAL --- */
+* {
+  box-sizing: border-box !important;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif; /* Đổi font cho sang */
+  background-color: #f8fafc;
+  overflow: hidden;
+}
+
+/* --- BỐ CỤC CHÍNH (FLEXBOX) --- */
+.admin-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* --- SIDEBAR CHUẨN 80PX HEADER --- */
+.sidebar {
+  width: 260px;
+  background: #ffffff;
+  color: #334155;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100; /* Sidebar nằm trên để che nếp */
+  border-right: 1px solid #e2e8f0;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar-header {
+  height: 80px !important; /* Ép bằng Header chính */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0 15px;
+}
+
+.sidebar .logo {
+  color: #0f172a;
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: #f1f5f9;
+  padding: 8px 15px;
+  border-radius: 10px;
+}
+
+.sidebar-menu {
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.sidebar a {
+  display: flex;
+  align-items: center;
+  color: #64748b;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.sidebar a .icon {
+  font-size: 1.4rem;
+  min-width: 28px;
+  margin-right: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar a:hover {
+  background: #f1f5f9;
+  color: #2563eb;
+}
+
+.sidebar a.active {
+  background: #eff6ff;
+  color: #2563eb;
+  box-shadow: inset 4px 0 0 #2563eb;
+}
+
+.sidebar.collapsed a .text {
+  display: none;
+}
+
+.sidebar.collapsed a .icon {
+  margin-right: 0;
+}
+
+/* --- HEADER BỰ & DÀN ĐỀU (80PX) --- */
+.header {
+  height: 80px !important; /* Cao bằng sidebar header */
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px !important;
+  flex-shrink: 0;
+  border-bottom: 1px solid #e2e8f0 !important;
+  border-left: none !important; /* Xóa nếp giao nhau */
+  z-index: 99;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-toggle {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #64748b;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-toggle:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.header-title {
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 1.1rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-logout {
+  background: #fff1f2;
+  color: #e11d48;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #fecdd3;
+  padding: 10px 20px !important;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background: #e11d48;
+  color: #ffffff;
+}
+
+/* --- MAIN WORKSPACE --- */
+.main {
+  padding: 30px;
+  flex: 1;
+  overflow-y: auto;
+  background-color: #f8fafc;
+}
+
+.main-content-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  min-height: 100%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  color: #334155; 
+  border: 1px solid #e2e8f0;
+}
+
+.main-content-box h1, 
+.main-content-box h2 {
+  margin-bottom: 25px;
+  color: #0f172a;
+  border-bottom: 3px solid #2563eb;
+  padding-bottom: 10px;
+  display: inline-block;
+  font-weight: 800;
+}
