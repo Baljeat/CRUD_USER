@@ -7,4 +7,8 @@ const pool = new Pool({
   }
 });
 
+pool.on('connect', (client) => {
+  client.query("SET timezone = 'Asia/Ho_Chi_Minh'");
+});
+
 module.exports = pool;

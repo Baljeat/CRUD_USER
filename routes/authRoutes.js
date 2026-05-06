@@ -1,0 +1,10 @@
+const express = require("express");
+const router = express.Router();
+const authController = require("../controllers/authController");
+const { verifyToken, isAdmin } = require("../middleware/authMiddleware");
+router.post("/login", authController.login);
+router.get("/taikhoan", verifyToken, isAdmin, authController.getAccounts);
+router.post("/taikhoan", verifyToken, isAdmin, authController.createAccount);
+router.put("/taikhoan/:tentk", verifyToken, isAdmin, authController.updateAccount);
+router.delete("/taikhoan/:tentk", verifyToken, isAdmin, authController.deleteAccount);
+module.exports = router;
